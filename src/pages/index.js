@@ -24,12 +24,15 @@ export default function Home() {
           className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
           placeholder="Password"
         />
-        <button className="bg-orange-500 w-[390px] rounded-full p-1 mb-4 text-white">
-          Log In
-        </button>
+        <Link href={"/dashboard"}>
+          <button className="bg-orange-500 w-[390px] rounded-full p-1 mb-4 text-white">
+            Log In
+          </button>
+        </Link>
+
         <div className="flex flex-row gap-2">
           <div className="">Don't have account?</div>
-          <Link href={"/create"}>
+          <Link href={"/signup"}>
             <span className="text-base text-[#0166FF]">Sign up</span>
           </Link>
         </div>

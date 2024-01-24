@@ -29,9 +29,12 @@ export const CreateAccount = () => {
           className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
           placeholder="Re-password"
         />
-        <button className="bg-orange-500 w-[390px] rounded-full p-1 mb-4 text-white">
-          Sign up
-        </button>
+        <Link href={"/loadpage"}>
+          <button className="bg-orange-500 w-[390px] rounded-full p-1 mb-4 text-white">
+            Sign up
+          </button>
+        </Link>
+
         <div className="flex flex-row gap-2">
           <div className="text-base">Already have account?</div>
           <Link href={"/"}>
