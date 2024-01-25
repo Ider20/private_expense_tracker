@@ -20,13 +20,6 @@ export const Steps = () => {
     }
   };
 
-  const handleSignUp = async () => {
-    const request = await fetch("http://localhost:8080/users", {
-      method: "POST",
-      header: { "Content-Type": "application/json" },
-      body: JSON.stringify("end Data ogno"),
-    });
-  };
   return (
     <div className="w-full flex flex-col items-center pt-10">
       <div className="flex justify-center mb-12">I&U</div>
@@ -42,7 +35,7 @@ export const Steps = () => {
         {/* <div className="text-gray-500 text-4xl self-start">_______</div> */}
         <div className="flex flex-col items-center gap-2">
           <div
-            className={`bg-${steps >= 2 ? bgColor : `[#E5E7EB]`} w-5 text-${
+            className={`bg-${steps === 2 ? bgColor : "[#E5E7EB]"} w-5 text-${
               steps >= 2 ? textColor : "gray-500"
             } flex justify-center rounded-full`}
           >
