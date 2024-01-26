@@ -22,37 +22,51 @@ export const Steps = () => {
 
   return (
     <div className="w-full flex flex-col items-center pt-10">
-      <div className="flex justify-center mb-12">I&U</div>
-      <div className="flex gap-x-24 justify-center text-sm mb-[141px]">
+      <div className="flex justify-center mb-12 text-2xl font-bold">
+        I<span className="text-orange-500">&</span>U
+      </div>
+      <div className="flex justify-center text-sm ">
         <div className="flex flex-col items-center gap-2">
           <div
             className={`bg-orange-500 w-5 text-white flex justify-center rounded-full`}
           >
             1
           </div>
-          <div>Currency</div>
         </div>
+        <div
+          className={`w-[90px] h-[5px] border border-${
+            steps >= 2 ? bgColor : "gray-200"
+          } bg-${steps >= 2 ? bgColor : "gray-200"} mt-2`}
+        ></div>
         {/* <div className="text-gray-500 text-4xl self-start">_______</div> */}
         <div className="flex flex-col items-center gap-2">
           <div
-            className={`bg-${steps === 2 ? bgColor : "[#E5E7EB]"} w-5 text-${
+            className={`bg-${steps >= 2 ? bgColor : "gray-200"} w-5 text-${
               steps >= 2 ? textColor : "gray-500"
             } flex justify-center rounded-full`}
           >
             2
           </div>
-          <div>Balance</div>
         </div>
+        <div
+          className={`w-[90px] h-[5px] border border-${
+            steps === 3 ? bgColor : "gray-200"
+          } bg-${steps === 3 ? bgColor : "gray-200"} mt-2`}
+        ></div>
         <div className="flex flex-col items-center gap-2">
           <div
-            className={`bg-${steps === 3 ? bgColor : "[#E5E7EB]"} w-5 text-${
+            className={`bg-${steps === 3 ? bgColor : "gray-200"} w-5 text-${
               steps === 3 ? textColor : "gray-500"
             } flex justify-center rounded-full`}
           >
             3
           </div>
-          <div>Finish</div>
         </div>
+      </div>
+      <div className="mb-[141px] flex gap-16 mt-2 text-sm text-gray-500">
+        <div>Currency</div>
+        <div>Balance</div>
+        <div>Finish</div>
       </div>
       {/* Step One ====================================================*/}
       {steps === 1 && (
@@ -102,7 +116,7 @@ export const Steps = () => {
           </button>
         </div>
       )}
-      {/* // Step Three ==================================================== */}
+      {/* Step Three ====================================================*/}
       {steps === 3 && (
         <div className="flex flex-col items-center">
           <div className="w-10 bg-orange-500 m-auto flex justify-center items-center rounded-full h-10 mb-6">
@@ -115,7 +129,7 @@ export const Steps = () => {
           </div>
           <Link href={"./"}>
             <button className="w-[340px] bg-orange-500 text-white p-1 rounded-full">
-              Go to Dashboard
+              Go to back Login page
             </button>
           </Link>
         </div>
