@@ -20,12 +20,18 @@ export default function Home() {
 
   const handleLogin = async () => {
     const loginData = { email: inputEmail, password: inputPassword };
-
-    const response = await fetch("http://localhost:8080", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loginData),
-    });
+    try {
+      if (inputEmail && inputPassword) {
+        const response = await fetch("http://localhost:8080", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(loginData),
+        });
+        console.log(response, "Login response");
+      }
+    } catch (error) {
+      alert("Problem to login");
+    }
   };
 
   return (
@@ -44,6 +50,7 @@ export default function Home() {
         <input
           className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
           placeholder="Email"
+          type="email"
           onChange={handleEmail}
         />
         <input
