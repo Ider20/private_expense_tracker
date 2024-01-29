@@ -22,7 +22,7 @@ export const Steps = () => {
 
   return (
     <div className="w-full flex flex-col items-center pt-10">
-      <div className="flex justify-center mb-12 text-2xl font-bold">
+      <div className="flex justify-center mb-12 text-4xl font-bold">
         I<span className="text-orange-500">&</span>U
       </div>
       <div className="flex justify-center text-sm ">
@@ -34,7 +34,7 @@ export const Steps = () => {
           </div>
         </div>
         <div
-          className={`w-[90px] h-[5px] border border-${
+          className={`w-[90px] h-[5px] border-${
             steps >= 2 ? bgColor : "gray-200"
           } bg-${steps >= 2 ? bgColor : "gray-200"} mt-2`}
         ></div>
@@ -49,7 +49,7 @@ export const Steps = () => {
           </div>
         </div>
         <div
-          className={`w-[90px] h-[5px] border border-${
+          className={`w-[90px] h-[5px] border-${
             steps === 3 ? bgColor : "gray-200"
           } bg-${steps === 3 ? bgColor : "gray-200"} mt-2`}
         ></div>
@@ -78,7 +78,7 @@ export const Steps = () => {
           <select
             name=""
             id=""
-            className="border rounded-md p-2 w-[340px] mb-2 cursor-pointer"
+            className="border rounded-lg p-2 w-[340px] mb-2 cursor-pointer"
           >
             <option>MNT-Mongolian Tugrik</option>
           </select>
@@ -102,7 +102,7 @@ export const Steps = () => {
           </div>
           <div className="mb-6">Set up your cash Balance</div>
           <input
-            className="border w-[350px] p-2 rounded-md"
+            className="border w-[350px] px-4 p-2 rounded-lg"
             placeholder="Email"
           />
           <div className="w-[340px] mb-[32px]">

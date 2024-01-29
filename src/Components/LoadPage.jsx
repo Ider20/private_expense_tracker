@@ -4,14 +4,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export const LoadPage = () => {
-  const rout = useRouter();
-  useEffect(() => {
-    const time = setTimeout(() => {
-      rout.push("/steps");
-    }, 1500);
-    return () => clearTimeout(time);
-  }, [rout]);
-
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center gap-4">
       <div>

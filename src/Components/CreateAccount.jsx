@@ -12,6 +12,8 @@ export const CreateAccount = () => {
 
   const [showPassword, setShowPassword] = useState("password");
   const [showRePassword, setShowRePassword] = useState("password");
+  const [visibleEyePassword, setVisibleEyePassword] = useState(true);
+  const [visibleEyeRePassword, setVisibleEyeRePassword] = useState(true);
 
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +23,7 @@ export const CreateAccount = () => {
     } else {
       setShowPassword("password");
     }
+    setVisibleEyePassword(!visibleEyePassword);
   };
   const handleShowRePassword = () => {
     if (showRePassword === "password") {
@@ -28,9 +31,10 @@ export const CreateAccount = () => {
     } else {
       setShowRePassword("password");
     }
+    setVisibleEyeRePassword(!visibleEyeRePassword);
   };
 
-  const router = useRouter();
+  const router = useRouter(); // Routing =============================
 
   const inputUserName = (e) => {
     // console.log(e.target.value, "User Name");
@@ -68,26 +72,28 @@ export const CreateAccount = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),
           });
+          console.log(response, "response");
           if (response.ok) {
-            alert("Succesfully submit");
+            alert("Succesfully Signed up");
             return router.push("/steps");
           }
           // const jsonTest = await response.json();
           // console.log(jsonTest, "jsonTest");
 
-          if (!response.ok) {
-            return alert("User already exist");
+          if (response.ok === false) {
+            alert("User already exist");
+            return router.push("/");
           }
         } else {
-          return alert("Missing field!");
+          return alert("Missing field(s)!");
         }
         // console.log(response, "response");
       }
-      // redirect
     } catch (error) {
       alert("Error to submit:" + error.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -97,7 +103,7 @@ export const CreateAccount = () => {
       ) : (
         <div className="w-full m-auto flex">
           <div className="w-2/4 m-auto flex flex-col items-center gap-3">
-            <div className="text-2xl font-semibold">
+            <div className="text-4xl font-semibold">
               I<span className="text-orange-500">&</span>U
             </div>
             <div className="flex flex-col items-center mb-4">
@@ -110,46 +116,61 @@ export const CreateAccount = () => {
             </div>
 
             <input
-              className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
+              className="border w-[390px] h-12 rounded-lg px-4 p-1 bg-[#ebebeb] hover:shadow-lg ease-in-out duration-200"
               placeholder="Name"
               onChange={inputUserName}
             />
             <input
-              className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
+              className="border w-[390px] h-12 rounded-lg px-4 p-1 bg-[#ebebeb] hover:shadow-lg ease-in-out duration-200"
               placeholder="Email"
               onChange={inputUserEmail}
             />
-            <div className="flex gap-2 ml-[21px]">
+            <div className="flex gap-2 ml-[26px]">
               <input
-                className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
+                className="border w-[390px] h-12 rounded-lg px-4 p-1 bg-[#ebebeb] hover:shadow-lg ease-in-out duration-200"
                 placeholder="Password"
                 type={showPassword}
                 onChange={inputUserPassword}
               />
-              <input type="checkbox" onClick={handleShowPassword} />
+              {/* <input type="checkbox" onClick={handleShowPassword} /> */}
+
+              <button onClick={handleShowPassword} className="text-orange-500 ">
+                {visibleEyePassword ? (
+                  <i class="fa-regular fa-eye"></i>
+                ) : (
+                  <i className="fa-solid fa-eye"></i>
+                )}
+              </button>
             </div>
 
-            <div className="flex gap-2 ml-[21px]">
+            <div className="flex gap-2 ml-[26px]">
               <input
-                className="border w-[390px] rounded-md p-1 bg-[#ebebeb]"
+                className="border w-[390px] h-12 rounded-lg px-4 p-1 bg-[#ebebeb] hover:shadow-lg ease-in-out duration-200"
                 placeholder="Re-password"
                 type={showRePassword}
                 onChange={inputRePassword}
               />
-              <input type="checkbox" onClick={handleShowRePassword} />
+              {/* <input type="checkbox" onClick={handleShowRePassword} /> */}
+              <button
+                onClick={handleShowRePassword}
+                className="text-orange-500"
+              >
+                {visibleEyeRePassword ? (
+                  <i class="fa-regular fa-eye"></i>
+                ) : (
+                  <i class="fa-solid fa-eye"></i>
+                )}
+              </button>
             </div>
-
             <button
-              className="bg-orange-500 w-[390px] rounded-full p-1 mb-4 text-white"
+              className="bg-orange-500 w-[390px] h-12 rounded-full p-1 mb-4 text-white hover:shadow-lg ease-in-out duration-200"
               onClick={handleSignUp}
             >
               Sign up
             </button>
-
             <div className="flex flex-row gap-2">
               <div className="text-base">Already have account?</div>
               <Link href={"/"}>
-                {" "}
                 <span className="text-base text-[#0166FF]">Log in</span>
               </Link>
             </div>
