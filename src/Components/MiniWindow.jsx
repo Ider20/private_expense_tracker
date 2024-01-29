@@ -1,6 +1,30 @@
 import React from "react";
 
 export const MiniWindow = ({ handleOpen }) => {
+  const inputAmount = (e) => {
+    console.log(e.target.value);
+  };
+  const inputSelect = (e) => {
+    console.log(e.target.value);
+  };
+  const inputNote = (e) => {
+    console.log(e.target.value);
+  };
+  const handleAddRecord = () => {
+    const transactionData = [
+      {
+        userId: "bring user ID",
+        name: "user name",
+        amount: "bring inputAmount",
+        transaction_type: "INC || EXP",
+        description: "TEXT, bring note",
+        createdAt: "Date",
+        updateAt: "Date",
+        categoryId: "bring catId",
+        payee: "text",
+      },
+    ];
+  };
   return (
     <div className="flex h-full items-center">
       <div className="w-[800px] h-[512px] bg-white m-auto rounded-lg">
@@ -15,7 +39,9 @@ export const MiniWindow = ({ handleOpen }) => {
         <div className="flex px-6 py-5">
           <div>
             <div className="flex items-center w-[348px] h-10 justify-between bg-gray-100 rounded-full mb-5">
-              <div className="w-1/2 flex justify-center">Expense</div>
+              <div className="w-1/2 flex justify-center hover:bg-orange-500">
+                Expense
+              </div>
               <div className="w-1/2 flex justify-center">Income</div>
             </div>
             <div className=" border border-gray-300 rounded-lg bg-gray-100 px-4 py-3 mb-[19px]">
@@ -23,9 +49,10 @@ export const MiniWindow = ({ handleOpen }) => {
               <div className="flex gap-1">
                 <p className="text-gray-400">₮</p>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="0.00"
                   className="bg-gray-100 px-1 w-full"
+                  onChange={inputAmount}
                 />
               </div>
             </div>
@@ -37,8 +64,10 @@ export const MiniWindow = ({ handleOpen }) => {
                 name=""
                 id=""
                 className=" rounded-lg border border-gray-300 w-[348px] h-[48px] px-4 bg-gray-100"
+                onChange={inputSelect}
               >
-                <option value="">Choose</option>
+                <option value="choose">Choose</option>
+                <option value="test">Test</option>
               </select>
             </div>
             <div className="flex gap-3">
@@ -90,6 +119,7 @@ export const MiniWindow = ({ handleOpen }) => {
                 rows="10"
                 className="border border-gray-300 bg-gray-100 rounded-lg p-4"
                 placeholder="Write here"
+                onChange={inputNote}
               ></textarea>
             </div>
           </div>
