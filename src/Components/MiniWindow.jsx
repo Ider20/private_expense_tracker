@@ -10,6 +10,14 @@ export const MiniWindow = ({ handleOpen }) => {
   const inputNote = (e) => {
     console.log(e.target.value);
   };
+
+  const testLocalStorage = () => {
+    const storedToken = localStorage.getItem("token");
+    console.log(storedToken, "StoredToken");
+  };
+  const deleteStorage = () => {
+    localStorage.removeItem("token");
+  };
   const handleAddRecord = () => {
     const transactionData = [
       {
@@ -93,8 +101,15 @@ export const MiniWindow = ({ handleOpen }) => {
               </div>
             </div>
             <div className="mt-8">
-              <button className="w-[348px] bg-orange-500 h-10 rounded-full text-white">
+              <button
+                className="w-[348px] bg-orange-500 h-10 rounded-full text-white"
+                onClick={testLocalStorage}
+              >
                 Add Record
+              </button>
+              {/* Testing purpose */}
+              <button className="border" onClick={deleteStorage}>
+                Delete Storage
               </button>
             </div>
           </div>

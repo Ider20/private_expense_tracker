@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { LoadPage } from "../Components/LoadPage";
 import { useRouter } from "next/router";
+import { jwtDecode } from "jwt-decode";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +53,12 @@ export default function Home() {
         body: JSON.stringify(loginData),
       });
       console.log(response);
+
+      const data = await response.json();
+      console.log(data.token, "data"); // Token from respond
+      localStorage.setItem("token", data.token); // Local storage of Token
+      const decodedToken = jwtDecode(data.token);
+      console.log(decodedToken, "decodedToken");
 
       if (response.ok) {
         // Handle successful login
