@@ -33,6 +33,7 @@ export const MiniWindow = ({ handleOpen }) => {
       },
     ];
   };
+  // asd
   return (
     <div className="flex h-full items-center">
       <div className="w-[800px] h-[512px] bg-white m-auto rounded-lg">
