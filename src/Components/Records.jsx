@@ -5,9 +5,20 @@ import { House } from "../Components/Icons/House";
 import { Food } from "../Components/Icons/Food";
 import { MiniWindow } from "../Components/MiniWindow";
 import { useState } from "react";
+import { MiniCategoryWindow } from "../Components/MiniCategoryWindow";
 
 export const Records = () => {
   const [openWindow, setOpenWindow] = useState(false);
+  const [openCatyWindow, setOpenCatyWindow] = useState(false);
+
+  const handleOpenCaty = () => {
+    setOpenCatyWindow(!openCatyWindow);
+  };
+  const handleCloseCaty = (e) => {
+    if (e.target.parentNode.classList.contains("bg-back-color")) {
+      handleOpenCaty();
+    }
+  };
   const handleOpen = () => {
     setOpenWindow(!openWindow);
   };
@@ -81,6 +92,14 @@ export const Records = () => {
           <MiniWindow handleOpen={handleOpen} />
         </div>
       )}
+      {openCatyWindow && (
+        <div
+          className="fixed z-10 w-full h-full bg-back-color"
+          onClick={handleCloseCaty}
+        >
+          <MiniCategoryWindow handleOpenCaty={handleOpenCaty} />
+        </div>
+      )}
       <div className="w-[1200px] m-auto flex gap-6 pt-[112px] pb-8">
         {/* Left Side ======================================================================================== */}
         <div className="w-[282px] h-[1080px] bg-white rounded-lg py-6 px-4">
@@ -137,7 +156,10 @@ export const Records = () => {
                 </li>
               ))}
             </ul>
-            <button className="mt-2 ml-3 hover:scale-[1.04] duration-100">
+            <button
+              className="mt-2 ml-3 hover:scale-[1.04] duration-100"
+              onClick={handleOpenCaty}
+            >
               <i class="fa-solid fa-plus text-orange-500"></i> Add Category
             </button>
           </div>

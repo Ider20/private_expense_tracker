@@ -57,8 +57,10 @@ export default function Home() {
       const data = await response.json();
       console.log(data.token, "data"); // Token from respond
       localStorage.setItem("token", data.token); // Local storage of Token
+
       const decodedToken = jwtDecode(data.token);
       console.log(decodedToken, "decodedToken");
+      localStorage.setItem("userId", decodedToken.userId); // Local storage of UserID
 
       if (response.ok) {
         // Handle successful login
