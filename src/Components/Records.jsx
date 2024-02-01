@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HeaderDashBoard } from "../Components/HeaderDashBoard";
 import { ArrowDropDown } from "../Components/Icons/ArrowDropDown";
 import { House } from "../Components/Icons/House";
@@ -8,6 +8,28 @@ import { useState } from "react";
 import { MiniCategoryWindow } from "../Components/MiniCategoryWindow";
 
 export const Records = () => {
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategory = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/category");
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategory();
+  }, []);
+
+  const getCategory = () => {
+    return categories.map((category) => category);
+  };
+
+  console.log(categories, "categories");
+
   const [openWindow, setOpenWindow] = useState(false);
   const [openCatyWindow, setOpenCatyWindow] = useState(false);
 
@@ -27,19 +49,7 @@ export const Records = () => {
       handleOpen();
     }
   };
-  const categories = [
-    { caty: "Food & Drinks" },
-    { caty: "hopping" },
-    { caty: "Housing" },
-    { caty: "Transportation" },
-    { caty: "Vehicle" },
-    { caty: "Life & Entertainment" },
-    { caty: "Communication" },
-    { caty: "Financial expenses" },
-    { caty: "Investments" },
-    { caty: "Income" },
-    { caty: "Others" },
-  ];
+
   const lend = [
     {
       icon: <House />,
@@ -97,7 +107,10 @@ export const Records = () => {
           className="fixed z-10 w-full h-full bg-back-color"
           onClick={handleCloseCaty}
         >
-          <MiniCategoryWindow handleOpenCaty={handleOpenCaty} />
+          <MiniCategoryWindow
+            handleOpenCaty={handleOpenCaty}
+            fetchCategory={fetchCategory}
+          />
         </div>
       )}
       <div className="w-[1200px] m-auto flex gap-6 pt-[112px] pb-8">
@@ -143,14 +156,14 @@ export const Records = () => {
               <div className="text-gray-300">Clear</div>
             </div>
             <ul className="flex flex-col gap-3 ml-3 mb-4">
-              {categories.map((items, index) => (
+              {categories.map((category, index) => (
                 <li
                   key={index}
                   className="group flex justify-between items-center cursor-pointer hover:scale-[1.04] duration-100 hover:bg-orange-500 p-1 rounded-lg hover:text-white"
                 >
                   <div className="flex gap-2 items-center pl-2 ">
                     <i class="fa-solid fa-eye text-gray-400 group-hover:text-white"></i>
-                    {items.caty}
+                    {category.name}
                   </div>
                   <ArrowDropDown />
                 </li>

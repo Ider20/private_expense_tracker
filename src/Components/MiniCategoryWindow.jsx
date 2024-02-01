@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const MiniCategoryWindow = ({ handleOpenCaty }) => {
+export const MiniCategoryWindow = ({ handleOpenCaty, fetchCategory }) => {
   const [selectValue, setSelectValue] = useState("");
   const [catNameValue, setCatNameValue] = useState("");
 
@@ -24,10 +24,12 @@ export const MiniCategoryWindow = ({ handleOpenCaty }) => {
       const response = await fetch("http://localhost:8080/category", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify(categoryData),
       });
       if (response.ok) {
         console.log(response.message);
+        handleOpenCaty();
+        fetchCategory();
       } else {
         console.log(response.message);
       }
@@ -74,7 +76,10 @@ export const MiniCategoryWindow = ({ handleOpenCaty }) => {
               className="w-[350px] h-12 border border-gray-300 bg-gray-100 rounded-lg px-4 hover:shadow-lg duration-200"
             />
           </div>
-          <button className="w-[446px] h-10 bg-orange-500 flex items-center justify-center gap-2 text-white rounded-lg hover:shadow-lg duration-200">
+          <button
+            className="w-[446px] h-10 bg-orange-500 flex items-center justify-center gap-2 text-white rounded-lg hover:shadow-lg duration-200 active:scale-95"
+            onClick={handleAddCategory}
+          >
             <i class="fa-solid fa-plus"></i> Add Category
           </button>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import Records from "../Components/Records";
 
 export const MiniWindow = ({ handleOpen }) => {
   const inputAmount = (e) => {
@@ -10,14 +11,16 @@ export const MiniWindow = ({ handleOpen }) => {
   const inputNote = (e) => {
     console.log(e.target.value);
   };
+  const categories = Records.getCategory(); // Getting categories from 'Records' component
+  console.log(categories, "categories");
 
   const testLocalStorage = () => {
     const storedToken = localStorage.getItem("token");
     console.log(storedToken, "StoredToken");
   };
-  const deleteStorage = () => {
-    localStorage.removeItem("token");
-  };
+  // const deleteStorage = () => {
+  //   localStorage.removeItem("token");
+  // };
   const handleAddRecord = () => {
     const transactionData = [
       {
@@ -44,7 +47,7 @@ export const MiniWindow = ({ handleOpen }) => {
           </button>
         </div>
         <hr />
-        {/* Left side =============================== */}
+        {/* Left side ============================================================================================= */}
         <div className="flex px-6 py-5">
           <div>
             <div className="flex items-center w-[348px] h-10 justify-between bg-gray-100 rounded-full mb-5">
@@ -109,12 +112,12 @@ export const MiniWindow = ({ handleOpen }) => {
                 Add Record
               </button>
               {/* Testing purpose */}
-              <button className="border" onClick={deleteStorage}>
+              {/* <button className="border" onClick={deleteStorage}>
                 Delete Storage
-              </button>
+              </button> */}
             </div>
           </div>
-          {/* Right side =============================== */}
+          {/* Right side ===================================================================================== */}
           <div className="px-6">
             <div className="mb-[19px]">
               <div className="mb-[5px]">Payee</div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { useState } from "react";
@@ -60,7 +59,7 @@ export default function Home() {
 
       const decodedToken = jwtDecode(data.token);
       console.log(decodedToken, "decodedToken");
-      localStorage.setItem("userId", decodedToken.userId); // Local storage of UserID
+      // localStorage.setItem("userId", decodedToken.userId); // Local storage of UserID
 
       if (response.ok) {
         // Handle successful login
