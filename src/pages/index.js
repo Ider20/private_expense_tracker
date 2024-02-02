@@ -1,14 +1,16 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LoadPage } from "../Components/LoadPage";
 import { useRouter } from "next/router";
 import { jwtDecode } from "jwt-decode";
+import { AuthenticationContext } from "@/Components/AuthenticationProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const { login } = useContext(AuthenticationContext);
   // Statement ==========================================================================
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -44,34 +46,12 @@ export default function Home() {
     try {
       if (!inputEmail || !inputPassword) {
         alert("Please enter email or password.");
-        return router.push("/");
       }
-      const loginData = { email: inputEmail, password: inputPassword };
-      const response = await fetch("http://localhost:8080", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
-      });
-      console.log(response);
-
-      const data = await response.json();
-      console.log(data.token, "data"); // Token from respond
-      localStorage.setItem("token", data.token); // Local storage of Token
-
+      await login(inputEmail, inputPassword);
+      // console.log(data.token, "data"); // Token from respond
       // const decodedToken = jwtDecode(data.token);
       // console.log(decodedToken, "decodedToken");
       // localStorage.setItem("userId", decodedToken.userId); // Local storage of UserID
-
-      if (response.ok) {
-        // Handle successful login
-        console.log("Successfully logged in");
-        return router.push("/dashboard");
-      } else {
-        // Handle login failure
-        const errorData = await response.json();
-        alert(`Login failed: ${errorData.message}`);
-        return router.push("/");
-      }
     } catch (error) {
       console.error("Problem during login:", error);
       alert("Problem to login. Please try again.");

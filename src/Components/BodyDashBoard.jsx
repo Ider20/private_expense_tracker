@@ -1,8 +1,12 @@
 import React from "react";
 import { House } from "../Components/Icons/House";
 import { WiFi } from "../Components/Icons/WiFi";
+import { useContext } from "react";
+import { AuthenticationContext } from "./AuthenticationProvider";
 
 export const BodyDashBoard = () => {
+  const { user } = useContext(AuthenticationContext);
+  console.log(user, "Dashboar user");
   const records = [
     {
       icon: <House />,
@@ -19,6 +23,15 @@ export const BodyDashBoard = () => {
   ];
   return (
     <div className="w-[1440px] m-auto flex flex-col items-center pt-20">
+      {/* {user &&
+        user?.map((user, index) => {
+          return (
+            <>
+              <p>{user.id}</p>
+              <p>{user.name}</p>
+            </>
+          );
+        })} */}
       {/* part 1 ==================================================================================================================== */}
       <div className=" flex gap-6 mt-[32px]">
         {/* card 1 ======== */}

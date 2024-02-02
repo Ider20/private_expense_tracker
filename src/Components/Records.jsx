@@ -28,7 +28,7 @@ export const Records = () => {
     return categories.map((category) => category);
   };
 
-  console.log(categories, "categories");
+  // console.log(categories, "categories");
 
   const [openWindow, setOpenWindow] = useState(false);
   const [openCatyWindow, setOpenCatyWindow] = useState(false);
