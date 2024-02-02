@@ -9,24 +9,36 @@ export const AuthenticationProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState("");
 
+  // Recieving token and Decoding action ===============================================
   useEffect(() => {
-    if (!user) {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const tokenDecoded = jwtDecode(token);
+      if (tokenDecoded) {
+        const userId = tokenDecoded.userId;
+        console.log(userId, "userId");
+        setUser(userId);
+        fetchUserData(userId);
+      } else {
+        router.replace("/");
+      }
+    } else {
       router.replace("/");
     }
-
-    const token = localStorage.getItem("token");
-    //decode here
-    const payload = jwtDecode(token);
-    console.log(payload.userId, "payload");
-    setUser(payload.userId);
   }, []);
 
-  const userData = async () => {
-    const response = await fetch("http://localhost:8080/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+  // Fetching user data ================================================================
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/users?userId=${userId}`
+      );
+      const data = await response.json();
+      console.log(data, "datad");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
